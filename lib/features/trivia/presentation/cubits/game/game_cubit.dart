@@ -31,7 +31,7 @@ class GameCubit extends Cubit<GameState> {
     final newIndex = currentState.currentIndex + 1;
 
     if (currentState.currentIndex == currentState.questions.length - 1) {
-      emit(GameFinishedState(score: currentState.score, numberOfQuestions: currentState.questions.length));
+      finishGame();
       return;
     }
 
@@ -40,5 +40,10 @@ class GameCubit extends Cubit<GameState> {
       selectedAnswer: null,
       currentQuestionAnswered: false,
     ));
+  }
+
+  void finishGame() {
+    final currentState = state as GameOngoingState;
+    emit(GameFinishedState(score: currentState.score, numberOfQuestions: currentState.questions.length));
   }
 }
