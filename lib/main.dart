@@ -28,8 +28,16 @@ class Trivio extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          fontFamily: 'Montserrat',
           colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromARGB(255, 244, 128, 30),
+          ),
+          filledButtonTheme: FilledButtonThemeData(
+            style: FilledButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
           ),
         ),
         navigatorKey: sl<GlobalKey<NavigatorState>>(),

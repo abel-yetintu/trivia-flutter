@@ -8,13 +8,13 @@ class TimerCubit extends Cubit<TimerState> {
   final Ticker _ticker;
   StreamSubscription<int>? _tickerSubscription;
 
-  TimerCubit({required int seconds, required Ticker ticker})
+  TimerCubit({required int seconds, required Ticker ticker, required int totalSeconds})
       : _ticker = ticker,
-        super((TimerRunInProgress(remainingSeconds: seconds))) {
+        super((TimerRunInProgress(remainingSeconds: seconds, totalSeconds: totalSeconds))) {
     _tickerSubscription?.cancel();
     _tickerSubscription = _ticker.tick(ticks: seconds).listen((remaining) {
       if (remaining > 0) {
-        emit(TimerRunInProgress(remainingSeconds: remaining));
+        emit(TimerRunInProgress(remainingSeconds: remaining, totalSeconds: state.totalSeconds));
       } else {
         emit(const TimerRunComplete());
       }
